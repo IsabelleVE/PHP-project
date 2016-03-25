@@ -1,5 +1,5 @@
 <?php
-include_once ("classes/Project.class.php");
+include_once("classes/User.class.php");
 if(!empty($_POST)){
     try {
         $u = new User();
