@@ -1,18 +1,18 @@
 <?php
 
 // function canLogin
-// cookies staan op de gebruiker zijn/haar pc => waardoor manipuleerbaar
+// cookies staan op de gebruiker zijn/haar pc => waardoor manipuleerbaar 
 
 function canLogin( $p_username, $p_password ){
     if( $p_username == "samuel@sieben.com" && $p_password == "secret" ){
-
+        
         return true;
     }
     else{
-
+        
         return false;
     }
-
+    
 }
 
 // if structure 
@@ -48,7 +48,7 @@ $password = $_POST['password'];
     }  
     else{
         // feedback
-        $error = "Whoops, connot login."; 
+        $error = "Wow stop! You are using wrong input"; 
     }
 }
 
@@ -59,13 +59,19 @@ $password = $_POST['password'];
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Facebook</title>
+    <title>Instagram</title>
     <!-- LAYOUT BY ED BOND: http://codepen.io/edbond88/pen/yGjAu -->
-    <link rel="stylesheet" href="css/facebook.css">
+    <link rel="stylesheet" href="css/instagram.css">
 </head>
 <body>
+        
+       <nav id="navigatie">
+           <p>WELCOME TO</p>
+           <img id="logoinsta" src="images/Instragram%20logo%202013.png">
+       </nav>
+       
         <section class="login-form-wrap">
-          <h1>Facebook</h1>
+          <h1>Welcome to Instagram! Log In</h1>
           
           <?php
             

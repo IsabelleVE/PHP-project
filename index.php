@@ -39,25 +39,202 @@ else{
 }
 
 
+// PHP ACTIVITY
 
-?>
+include_once("classes/Activity.class.php");
+$activity = new Activity();
+
+//controleer of er een update wordt verzonden
+if(!empty($_POST['activitymessage']))
+{
+	$activity->Text = $_POST['activitymessage'];
+	try
+	{
+		$activity->Save();
+	}
+	catch (Exception $e)
+	{
+		$feedback = $e->getMessage();
+	}
+}
+
+//altijd alle laatste activiteiten ophalen
+$recentActivities = $activity->GetRecentActivities();
 
 
 
-
-
-<!DOCTYPE html>
+?><!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Facebook</title>
+    <title>Instagram</title>
     <!-- LAYOUT BY ED BOND: http://codepen.io/edbond88/pen/yGjAu -->
-    <link rel="stylesheet" href="css/facebook.css">
+    <link rel="stylesheet" href="css/instagram.css">
+    
+   
+    
+     <script type="text/javascript" src="https://code.jquery.com/jquery-2.2.2.min.js"></script>
+
+	<!-- JQUERY -->
+	<script>
+		$(document).ready(function(){
+			<!-- e = klikevent -->
+			$("#btnSubmit").on("click", function(e){
+				// tekstvak uitlezen
+				var message = $("#activitymessage").val();
+
+				// post naar een php pagina om op te slaan
+				// message 1 is de naam van je JSON eigenschap
+				// message 1 is hetgene dat je moet uitlezen voor te tonen
+				// message 2 is de waarde van je tekstvak
+				$.post( "ajax/savemessage.php", {message: message })
+					.done(function( response ) {
+						// boodschap bijvoegen in UI
+						if(response.status == "success") {
+							// bijvoegen
+							var li = "<li style='display:none;'><h2>GoodBytes.be</h2> " + response.message + "</li>";
+							$("ul#listupdates").prepend(li);
+							$("ul#listupdates li:first-child").slideDown();
+
+							// enkel de laatste tien worden getoond
+							$("ul#listupdates li").last().slideUp(function(){
+								// anders werkt het maar 1 keer
+								$(this).remove();
+							});
+
+						}
+						else {
+							// foutmelding geven
+						}
+					});
+
+
+
+
+
+
+				e.preventDefault();
+
+			})
+		})
+	</script>
+
+	<style type="text/css">
+        
+        form{
+            border-radius: 3px; 
+        }
+        
+		body
+		{
+			font-family: "Lucida Grande", Tahoma, Verdana, sans-serif;
+            border-radius: 3px;
+		}
+
+		h1
+		{
+			margin-bottom: 5px;
+		}
+
+		h2
+		{
+			color: lightskyblue;
+			display: inline;
+		}
+
+		ul
+		{
+			margin-top: 10px;
+		}
+
+		ul li
+		{
+			border-bottom: 1px dotted white;
+			padding: 15px 5px;
+		}
+
+		#activitymessage
+		{
+			border: 1px solid grey;
+			padding: 5px;
+			width: 280px;
+			font-size: 1.1em;
+		}
+
+		div.statusupdates
+		{
+			width: 380px;
+			background-color: white;
+			padding: 20px;
+			margin: 0 auto;
+		}
+
+		#btnSubmit
+		{
+			background-color: lightskyblue;
+			color: #fff;
+			font-size: 1.1em;
+			border: 1px solid #29447e;
+            border-radius: 2px; 
+		}
+
+		div.errors
+		{
+			width: 380px;
+			margin: 25px auto;
+			background-color: #bd273a;
+			-moz-border-radius: 10px;
+			color: white;
+			font-weight: bold;
+			text-shadow: 1px 1px 1px #000;
+			padding: 20px;
+			display:none;
+		}
+	</style> 
+    
 </head>
 <body>
+        
+       <nav id="navigatie">
+           <p>EXPERIENCE</p>
+           <img id="logoinsta" src="images/Instragram%20logo%202013.png">
+       </nav>
+       
         <section class="login-form-wrap" style="height: 156px">
           <p class="message">Welcome back!</p>
-          <a style="color: white" href="logout.php">Logout</a>
+          <a style="color: black" href="logout.php">Logout</a>
         </section>
+        
+        
+        
+        
+        
+        <form method="post" action="">
+		<div class="statusupdates">
+			<h1>Feed</h1>
+			<input type="text" placeholder="Add a description" id="activitymessage" name="activitymessage" />
+			<input id="btnSubmit" type="submit" value="Share" />
+
+			<!-- waar moet update komen? list item in ul  -->
+			<ul id="listupdates">
+				<?php
+				if(count($recentActivities) > 0)
+				{
+					foreach($recentActivities as $key=>$singleActivity)
+					{
+						echo "<li><h2>User</h2> ". $singleActivity['activity_description'] ."</li>";
+					}
+				}
+				else
+				{
+					echo "<li>Waiting for first status update</li>";
+				}
+				?>
+			</ul>
+
+		</div>
+	</form>
+	
+	
 </body>
 </html>
