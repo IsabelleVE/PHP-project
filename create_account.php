@@ -1,5 +1,5 @@
 <?php
-include_once("classes/User.class.php");
+include_once ("classes/Project.class.php");
 if(!empty($_POST)){
     try {
         $u = new User();
@@ -17,18 +17,27 @@ if(!empty($_POST)){
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Voorbereiding test</title>
+    <title>Instagram Sign Up</title>
+    <link rel="stylesheet" media="all" href="css/instagram.css">
     <link rel="stylesheet" type="text/css" media="all" href="css/reset.css" />
     <link rel="stylesheet" type="text/css" media="all" href="css/screen.css" />
+    
 </head>
 <body>
+
+<nav id="navigatie">
+           <p>SIGN UP</p>
+           <img id="logoinsta" src="images/Instragram%20logo%202013.png">
+</nav>
+       
+       
 <div>
     <?php if( isset($feedback)): ?>
         <div class="feedback"><?php echo $feedback?></div>
     <?php endif; ?>
     <div class="feedback">Gelieve alle velden in te vullen</div>
     <section class="login-form-wrap">
-        <h1>Facebook</h1>
+        <h1>Sign Up</h1>
 
         <?php
 
@@ -41,7 +50,11 @@ if(!empty($_POST)){
 
         <form class="login-form" method="POST" action="">
             <label>
-                <input type="text" name="fullname" placeholder="fullname">
+                <input type="text" name="firstname" placeholder="firstname">
+            </label>
+            
+             <label>
+                <input type="text" name="lastname" placeholder="lastname">
             </label>
             <label>
                 <input type="email" name="email" placeholder="Email">
@@ -52,9 +65,8 @@ if(!empty($_POST)){
             <label>
                 <input type="password" name="password" placeholder="Password">
             </label>
-            <input type="submit" value="Login">
+            <input type="submit" value="Sign Up">
         </form>
-        <h5><a href="#">Forgot password</a></h5>
     </section>
 </div>
 </body>
