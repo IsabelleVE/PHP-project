@@ -1,6 +1,10 @@
 <?php
+include("Db.class.php");
+
 class User{
-    private $m_sFullName;
+
+    private  $m_sFirstName;
+    private $m_sLastName;
     private $m_sEmail;
     private $m_sUserName;
     private $m_sPassword;
@@ -10,36 +14,45 @@ class User{
     public function __set($p_sProperty, $p_vValue)
     {
         switch($p_sProperty){
-            case "FullName":
+            case "FirstName":
                 if(!empty($p_vValue)){
-                    $this->m_sFullName = $p_vValue;
+                    $this->m_sFirstName = $p_vValue;
                 }else{
                     throw new Exception("Firstname cannot be empty.");
                 }
                 break;
             case "LastName":
-                $this->m_sLastName = $p_vValue;
+                if(!empty($p_vValue)){
+                    $this->m_sLastName = $p_vValue;
+                }else{
+                    throw new Exception("Lastname cannot be empty.");
+                }
+
                 break;
             case "Email":
-                $this->m_sEmail = $p_vValue;
+                if(!empty($p_vValue)){
+                    $this->m_sEmail = $p_vValue;
+                }else{
+                    throw new Exception("Email cannot be empty.");
+                }
+
                 break;
             case "UserName":
-                $this->m_sUserName= $p_vValue;
+                if(!empty($p_vValue)){
+                    $this->m_sUserName= $p_vValue;
+                }else{
+                    throw new Exception("Username cannot be empty.");
+                }
+
                 break;
             case "Password":
-                $this->m_sPassword = $p_vValue;
-                break;
-        }
-    }
+                if(!empty($p_vValue)){
+                    $this->m_sPassword = $p_vValue;
+                }else{
+                    throw new Exception("Password cannot be empty.");
+                }
 
-   /* private function canbook(){
-        // als checkinmonth < checkoutmonth
-        // als checkinmonth == checkoutmonth + checkinday < checkouday
-        if($this->m_iCheckInMonth < $this->m_iCheckOutMonth
-            || ($this->m_iCheckInMonth == $this->m_iCheckOutMonth && $this->m_iCheckInDay < $this->m_iCheckOutDay))
-        {return true;
-        } else{
-            return false;
+                break;
         }
     }
 
@@ -53,59 +66,75 @@ class User{
             case "LastName":
                 return $this->m_sLastName;
                 break;
-            case "CheckInDay":
-                return $this->m_iCheckInDay;
+            case "Email":
+                return $this->m_sEmail;
                 break;
-            case "Hotel":
-                return $this->m_sHotel;
+            case "UserName":
+                return $this->m_sUserName;
                 break;
-            case "CheckInMonth":
-                return $this->m_iCheckInMonth;
-                break;
-            case "CheckOutDay":
-                return $this->m_iCheckOutDay;
-                break;
-            case "CheckOutMonth":
-                return $this->m_iCheckOutMonth;
+            case "Password":
+                return $this->m_sPassword;
                 break;
         }
     }
 
     public function Save(){
 
-        if(! $this->canbook()){
-            throw new Exception("Checkin must be before checkout.");
+        $conn =  Db::getInstance();
+
+        $statement = $conn->prepare("select * from tblUser where username = :username");
+
+        $statement->bindValue(":username",$this->m_sUserName);
+        $statement->execute();
+
+        if($statement-> rowCount()>0)
+        {
+
+            throw new Exception("Username already exists");
         }
-        $conn = new PDO("mysql:host=localhost;dbname=imd","root","root");
-        $statement = $conn->prepare("INSERT INTO tblhotelbookings
+        else
+        {
+
+            $option = ['cost' => 12];
+            $this->m_sPassword=password_hash($this->m_sPassword,PASSWORD_DEFAULT,$option);
+            $statement = $conn->prepare("INSERT INTO tblUser
                             (
-                            booking_first_name,
-                            booking_last_name,
-                            booking_from_day,
-                            booking_from_month,
-                            booking_to_day,
-                            booking_to_month,
-                            booking_hotel
+                            email,
+                            firstname,
+                            lastname,
+                            username,
+                            password
                             )
                             VALUES
                             (
+                            :email,
                             :firstname,
                             :lastname,
-                            :ckechinday,
-                            :checkinmonth,
-                            :checkoutday,
-                            :checkoutmonth,
-                            :hotel
+                            :username,
+                            :password
                             )
                             ");
-        $statement->bindValue(":firstname",$this->FirstName);
-        $statement->bindValue(":lastname",$this->LastName);
-        $statement->bindValue(":checkinday",$this->CheckInDay);
-        $statement->bindValue(":checkinmonth",$this->CheckInMonth);
-        $statement->bindValue(":checkoutday",$this->CheckOutDay);
-        $statement->bindValue(":checkoutmonth",$this->CheckOutMonth);
-        $statement->bindValue(":hotel",$this->Hotel);
-        return $statement->execute();
 
+            $statement->bindValue(":email",$this->m_sEmail);
+            $statement->bindValue(":firstname",$this->m_sFirstName);
+            $statement->bindValue(":lastname",$this->m_sLastName);
+            $statement->bindValue(":username",$this->m_sUserName);
+            $statement->bindValue(":password",$this->m_sPassword);
+            $statement->execute();
+
+
+        }
+
+
+    }
+
+    /*private function canlogin(){
+
+        if($this->m_iCheckInMonth < $this->m_iCheckOutMonth
+            || ($this->m_iCheckInMonth == $this->m_iCheckOutMonth && $this->m_iCheckInDay < $this->m_iCheckOutDay))
+        {return true;
+        } else{
+            return false;
+        }
     }*/
 }

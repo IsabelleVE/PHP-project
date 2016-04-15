@@ -1,14 +1,15 @@
 <?php
-include_once ("classes/Project.class.php");
+include_once ("classes/User.class.php");
 if(!empty($_POST)){
     try {
         $u = new User();
-        $u->FullName = $_POST['fullname'];
+        $u->FirstName = $_POST['firstname'];
+        $u->LastName = $_POST['lastname'];
         $u->Email = $_POST['email'];
-        $u->Username = $_POST['username'];
+        $u->UserName = $_POST['username'];
         $u->Password= $_POST['password'];
         $u->Save();
-        $feedback = "Thanks for your booking";
+
     }catch(Exception $e) {
         $feedback = $e->getMessage();
     }
@@ -35,7 +36,6 @@ if(!empty($_POST)){
     <?php if( isset($feedback)): ?>
         <div class="feedback"><?php echo $feedback?></div>
     <?php endif; ?>
-    <div class="feedback">Gelieve alle velden in te vullen</div>
     <section class="login-form-wrap">
         <h1>Sign Up</h1>
 
