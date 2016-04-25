@@ -39,29 +39,6 @@ else{
 }
 
 
-// PHP ACTIVITY
-
-include_once("classes/Activity.class.php");
-$activity = new Activity();
-
-//controleer of er een update wordt verzonden
-if(!empty($_POST['activitymessage']))
-{
-	$activity->Text = $_POST['activitymessage'];
-	try
-	{
-		$activity->Save();
-	}
-	catch (Exception $e)
-	{
-		$feedback = $e->getMessage();
-	}
-}
-
-//altijd alle laatste activiteiten ophalen
-$recentActivities = $activity->GetRecentActivities();
-
-
 
 ?><!DOCTYPE html>
 <html lang="en">
@@ -204,37 +181,19 @@ $recentActivities = $activity->GetRecentActivities();
           <p class="message">Welcome back!</p>
           <a style="color: black" href="logout.php">Logout</a>
         </section>
-        
-        
-        
-        
-        
+
+
+
+
+
         <form method="post" action="">
 		<div class="statusupdates">
 			<h1>Feed</h1>
-			<input type="text" placeholder="Add a description" id="activitymessage" name="activitymessage" />
-			<input id="btnSubmit" type="submit" value="Share" />
 
-			<!-- waar moet update komen? list item in ul  -->
-			<ul id="listupdates">
-				<?php
-				if(count($recentActivities) > 0)
-				{
-					foreach($recentActivities as $key=>$singleActivity)
-					{
-						echo "<li><h2>User</h2> ". $singleActivity['activity_description'] ."</li>";
-					}
-				}
-				else
-				{
-					echo "<li>Waiting for first status update</li>";
-				}
-				?>
-			</ul>
 
 		</div>
 	</form>
-	
+
 	
 </body>
 </html>
