@@ -1,23 +1,26 @@
 <?php
 
-// function canLogin
-// cookies staan op de gebruiker zijn/haar pc => waardoor manipuleerbaar 
+include_once ("classes/User.class.php");
 
-function canLogin( $p_username, $p_password ){
-    if( $p_username == "samuel@sieben.com" && $p_password == "secret" ){
-        
-        return true;
+
+if(!empty($_POST)){
+    try {
+        $u = new User();
+        $u->UserName = $_POST['username'];
+        $u->Password= $_POST['password'];
+
+        if($u->canLogin()) {
+            session_start();
+            $_SESSION['loggedin'] = $_POST['username'];
+            header('location: index.php');
+        }
+    }catch(Exception $e) {
+        $feedback = $e->getMessage();
     }
-    else{
-        
-        return false;
-    }
-    
 }
-
 // if structure 
 
-if( !empty( $_POST ) ){
+/*if( !empty( $_POST ) ){
     
 $username = $_POST['email'];
 $password = $_POST['password'];
@@ -27,7 +30,7 @@ $password = $_POST['password'];
         session_start(); 
         $_SESSION['loggedin'] = "yes";
         
-        
+
         /* 
         
         // Vorige Cookieoplossing
@@ -43,7 +46,7 @@ $password = $_POST['password'];
         
         // redirect to index.php
         
-        header('location: index.php');
+       /* header('location: index.php');
         
     }  
     else{
@@ -51,7 +54,7 @@ $password = $_POST['password'];
         $error = "Wow stop! You are using wrong input"; 
     }
 }
-
+*/
 
 ?>
 
@@ -84,7 +87,7 @@ $password = $_POST['password'];
           
           <form class="login-form" method="POST" action="">
             <label>
-              <input type="email" name="email" placeholder="Email">
+              <input type="text" name="username" placeholder="Username">
             </label>
             <label>
               <input type="password" name="password" placeholder="Password">

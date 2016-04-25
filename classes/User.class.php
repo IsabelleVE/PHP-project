@@ -128,13 +128,28 @@ class User{
 
     }
 
-    /*private function canlogin(){
+    public function canLogin(){
 
-        if($this->m_iCheckInMonth < $this->m_iCheckOutMonth
-            || ($this->m_iCheckInMonth == $this->m_iCheckOutMonth && $this->m_iCheckInDay < $this->m_iCheckOutDay))
-        {return true;
+        $conn =  Db::getInstance();
+        $statement = $conn->prepare("select * from tblUser where username = :username");
+
+        $statement->bindValue(":username",$this->m_sUserName);
+        $statement->execute();
+
+        if( $statement->rowCount() > 0){
+
+           $result = $statement->fetch(); // array van resultaten opvragen
+            $password = $this->m_sPassword;
+            $hash = $result['password'];
+            if ( password_verify( $password, $hash) ){
+                return true;
+            } else{
+                return false;
+            }
+
         } else{
             return false;
         }
-    }*/
+
+    }
 }
