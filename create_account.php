@@ -9,6 +9,7 @@ if(!empty($_POST)){
         $u->UserName = $_POST['username'];
         $u->Password= $_POST['password'];
         $u->Save();
+        header('location: index.php');
 
     }catch(Exception $e) {
         $feedback = $e->getMessage();
