@@ -18,14 +18,14 @@ class User{
                 if(!empty($p_vValue)){
                     $this->m_sFirstName = $p_vValue;
                 }else{
-                    throw new Exception("Firstname cannot be empty.");
+                    throw new Exception("Gelieve alle velden in te vullen.");
                 }
                 break;
             case "LastName":
                 if(!empty($p_vValue)){
                     $this->m_sLastName = $p_vValue;
                 }else{
-                    throw new Exception("Lastname cannot be empty.");
+                    throw new Exception("Gelieve alle velden in te vullen.");
                 }
 
                 break;
@@ -33,7 +33,7 @@ class User{
                 if(!empty($p_vValue)){
                     $this->m_sEmail = $p_vValue;
                 }else{
-                    throw new Exception("Email cannot be empty.");
+                    throw new Exception("Gelieve alle velden in te vullen.");
                 }
 
                 break;
@@ -41,7 +41,7 @@ class User{
                 if(!empty($p_vValue)){
                     $this->m_sUserName= $p_vValue;
                 }else{
-                    throw new Exception("Username cannot be empty.");
+                    throw new Exception("Gelieve alle velden in te vullen.");
                 }
 
                 break;
@@ -49,7 +49,7 @@ class User{
                 if(!empty($p_vValue)){
                     $this->m_sPassword = $p_vValue;
                 }else{
-                    throw new Exception("Password cannot be empty.");
+                    throw new Exception("Gelieve alle velden in te vullen.");
                 }
 
                 break;
@@ -130,26 +130,24 @@ class User{
 
     public function canLogin(){
 
-        $conn =  Db::getInstance();
-        $statement = $conn->prepare("select * from tblUser where username = :username");
+                $conn =  Db::getInstance();
+                $statement = $conn->prepare("select * from tblUser where username = :username");
 
-        $statement->bindValue(":username",$this->m_sUserName);
-        $statement->execute();
+                $statement->bindValue(":username",$this->m_sUserName);
+                $statement->execute();
 
-        if( $statement->rowCount() > 0){
-
-           $result = $statement->fetch(); // array van resultaten opvragen
-            $password = $this->m_sPassword;
-            $hash = $result['password'];
-            if ( password_verify( $password, $hash) ){
-                return true;
+               if( $statement->rowCount() > 0){
+                   $result = $statement->fetch(); // array van resultaten opvragen
+                   $password = $this->m_sPassword;
+                   $hash = $result['password'];
+                   if ( password_verify( $password, $hash) ){
+                       return true;
             } else{
-                return false;
-            }
-
-        } else{
-            return false;
-        }
+                    return false;
+                       }
 
     }
+
+    }
+
 }

@@ -13,48 +13,15 @@ if(!empty($_POST)){
             session_start();
             $_SESSION['loggedin'] = $_POST['username'];
             header('location: index.php');
+        } else
+        {
+            throw new Exception("Your username or password was incorrect!");
         }
     }catch(Exception $e) {
         $feedback = $e->getMessage();
     }
 }
-// if structure 
 
-/*if( !empty( $_POST ) ){
-    
-$username = $_POST['email'];
-$password = $_POST['password'];
-
-    if( canLogin( $username, $password ) ){
-        
-        session_start(); 
-        $_SESSION['loggedin'] = "yes";
-        
-
-        /* 
-        
-        // Vorige Cookieoplossing
-        
-        $salt = "fnRfrhJdbdfb!!!!dnkfbsOnkmqkn!!Bd!d";
-        $secret = md5( $username.$salt );
-        $cookieContent = $username.",".$secret; 
-
-        // remember user
-        
-        setcookie( "loggedin", $cookieContent , time()+60*60*24*30); // cookie van 1 maand 
-        */
-        
-        // redirect to index.php
-        
-       /* header('location: index.php');
-        
-    }  
-    else{
-        // feedback
-        $error = "Wow stop! You are using wrong input"; 
-    }
-}
-*/
 
 ?>
 
@@ -78,9 +45,9 @@ $password = $_POST['password'];
           
           <?php
             
-          if( isset($error) ){
+          if( isset($feedback) ){
               
-              echo "<p class='error' > $error </p>";
+              echo "<p class='error' > $feedback </p>";
           }
             
             ?>
@@ -95,6 +62,7 @@ $password = $_POST['password'];
             <input type="submit" value="Login">
           </form>
           <h5><a href="#">Forgot password</a></h5>
+            <h5>Dont have an account?<a href="create_account.php">Sign up</a></h5>
         </section>
 </body>
 </html>
