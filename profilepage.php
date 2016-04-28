@@ -8,7 +8,6 @@
     
     <style type="text/css">
         
-       
 		.login-form-wrap{
             width: 1000px;
             display: block;
