@@ -3,8 +3,13 @@ include("Db.class.php");
 
 class Photo
 {
-    public function Uploaden()
+    public function SavePhoto()
     {
+        $conn =  Db::getInstance();
+    }
 
+    public function ShowPhoto()
+    {
+        $conn =  Db::getInstance();
     }
 }
