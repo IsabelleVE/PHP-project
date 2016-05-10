@@ -12,7 +12,7 @@ if(!empty($_POST)){
         if($u->canLogin()) {
             session_start();
             $_SESSION['loggedin'] = $_POST['username'];
-            header('location: wall.php');
+            header('location: index.php');
         } else
         {
             throw new Exception("Your username or password was incorrect!");
