@@ -2,6 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="6a0c7de1-5f61-411c-807a-053128187d8b" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/livesearch.php" afterPath="$PROJECT_DIR$/livesearch.php" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/settings.php" afterPath="$PROJECT_DIR$/settings.php" />
     </list>
     <ignored path="PHP-project.iws" />
@@ -39,10 +41,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Search.class.php" pinned="false" current-in-tab="false">
+      <file leaf-file-name="Search.class.php" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/classes/Search.class.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-0.625">
+            <state vertical-scroll-proportion="0.024390243">
               <caret line="1" column="12" selection-start-line="1" selection-start-column="12" selection-end-line="1" selection-end-column="12" />
               <folding>
                 <marker date="1462974859000" expanded="true" signature="191:239" placeholder="select * fro... tblUser" />
@@ -78,7 +80,7 @@
         <entry file="file://$PROJECT_DIR$/profilepage.php">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="-0.625">
-              <caret line="1" column="12" selection-start-line="1" selection-start-column="12" selection-end-line="1" selection-end-column="12" />
+              <caret line="31" column="9" selection-start-line="31" selection-start-column="9" selection-end-line="31" selection-end-column="9" />
               <folding />
             </state>
           </provider>
@@ -104,17 +106,29 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="settings.php" pinned="false" current-in-tab="true">
+      <file leaf-file-name="settings.php" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/settings.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.5365854">
-              <caret line="130" column="12" selection-start-line="130" selection-start-column="12" selection-end-line="130" selection-end-column="12" />
+            <state vertical-scroll-proportion="-13.75">
+              <caret line="130" column="0" selection-start-line="130" selection-start-column="0" selection-end-line="130" selection-end-column="0" />
               <folding>
-                <marker date="1462977514000" expanded="true" signature="269:309" placeholder="SELECT * FRO... tblUser" />
-                <marker date="1462977514000" expanded="true" signature="543:562" placeholder="..." />
-                <marker date="1462977514000" expanded="true" signature="3679:3708" placeholder="..." />
-                <marker date="1462977514000" expanded="true" signature="3806:3835" placeholder="..." />
-                <marker date="1462977514000" expanded="true" signature="4003:4072" placeholder="..." />
+                <marker date="1462978019000" expanded="true" signature="269:309" placeholder="SELECT * FRO... tblUser" />
+                <marker date="1462978019000" expanded="true" signature="543:562" placeholder="..." />
+                <marker date="1462978019000" expanded="true" signature="3667:3696" placeholder="..." />
+                <marker date="1462978019000" expanded="true" signature="3794:3823" placeholder="..." />
+                <marker date="1462978019000" expanded="true" signature="3991:4060" placeholder="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="livesearch.php" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/livesearch.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-2.5">
+              <caret line="4" column="43" selection-start-line="4" selection-start-column="43" selection-end-line="4" selection-end-column="43" />
+              <folding>
+                <element signature="e#6#113#0#PHP" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -156,6 +170,7 @@
         <option value="$PROJECT_DIR$/classes/User.class.php" />
         <option value="$PROJECT_DIR$/profilepage.php" />
         <option value="$PROJECT_DIR$/settings.php" />
+        <option value="$PROJECT_DIR$/livesearch.php" />
       </list>
     </option>
   </component>
@@ -553,7 +568,7 @@
     <entry file="file://$PROJECT_DIR$/profilepage.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.625">
-          <caret line="1" column="12" selection-start-line="1" selection-start-column="12" selection-end-line="1" selection-end-column="12" />
+          <caret line="31" column="9" selection-start-line="31" selection-start-column="9" selection-end-line="31" selection-end-column="9" />
           <folding />
         </state>
       </provider>
@@ -582,16 +597,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/classes/Search.class.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-0.625">
-          <caret line="1" column="12" selection-start-line="1" selection-start-column="12" selection-end-line="1" selection-end-column="12" />
-          <folding>
-            <marker date="1462974859000" expanded="true" signature="191:239" placeholder="select * fro... tblUser" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/classes/User.class.php">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-18.75">
@@ -615,14 +620,34 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/settings.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5365854">
-          <caret line="130" column="12" selection-start-line="130" selection-start-column="12" selection-end-line="130" selection-end-column="12" />
+        <state vertical-scroll-proportion="-13.75">
+          <caret line="130" column="0" selection-start-line="130" selection-start-column="0" selection-end-line="130" selection-end-column="0" />
           <folding>
-            <marker date="1462977514000" expanded="true" signature="269:309" placeholder="SELECT * FRO... tblUser" />
-            <marker date="1462977514000" expanded="true" signature="543:562" placeholder="..." />
-            <marker date="1462977514000" expanded="true" signature="3679:3708" placeholder="..." />
-            <marker date="1462977514000" expanded="true" signature="3806:3835" placeholder="..." />
-            <marker date="1462977514000" expanded="true" signature="4003:4072" placeholder="..." />
+            <marker date="1462978019000" expanded="true" signature="269:309" placeholder="SELECT * FRO... tblUser" />
+            <marker date="1462978019000" expanded="true" signature="543:562" placeholder="..." />
+            <marker date="1462978019000" expanded="true" signature="3667:3696" placeholder="..." />
+            <marker date="1462978019000" expanded="true" signature="3794:3823" placeholder="..." />
+            <marker date="1462978019000" expanded="true" signature="3991:4060" placeholder="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/livesearch.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-2.5">
+          <caret line="4" column="43" selection-start-line="4" selection-start-column="43" selection-end-line="4" selection-end-column="43" />
+          <folding>
+            <element signature="e#6#113#0#PHP" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/classes/Search.class.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.024390243">
+          <caret line="1" column="12" selection-start-line="1" selection-start-column="12" selection-end-line="1" selection-end-column="12" />
+          <folding>
+            <marker date="1462974859000" expanded="true" signature="191:239" placeholder="select * fro... tblUser" />
           </folding>
         </state>
       </provider>

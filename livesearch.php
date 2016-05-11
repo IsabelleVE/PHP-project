@@ -1,8 +1,8 @@
 <?php
-$xmlDoc=new DOMDocument();
-$xmlDoc->load("links.xml");
+/*$xmlDoc=new DOMDocument();
+$xmlDoc->load("profilepage.php");
 
-$x=$xmlDoc->getElementsByTagName('link');
+$x=$xmlDoc->getElementsByTagName('link');*/
 
 //get the q parameter from URL
 $q=$_GET["q"];
