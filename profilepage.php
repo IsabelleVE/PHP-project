@@ -132,6 +132,18 @@ echo $msg . "<br />";
             width: 100px;
         }
         
+              footer{
+    background-color: #3f729b;
+    display: block;
+    color: white;
+    border-top-left-radius: 2em;
+    margin-top: 3em;
+    border-top-right-radius: 2em;
+    padding-bottom: 1em;
+    text-align: center;
+    
+}
+        
         
 	</style> 
     
@@ -173,5 +185,12 @@ echo $msg . "<br />";
 
     </form>
 </section>
+
+
+<footer>
+    
+    <h3> &copy; <p> Instagram 2015 - 2016 </p>  </h3>
+</footer>  
+
 </body>
 </html>
