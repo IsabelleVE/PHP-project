@@ -1,4 +1,20 @@
-<!DOCTYPE html>
+<?php
+
+session_start();
+
+if( isset( $_SESSION['loggedin'] ) ){
+
+
+}
+else{
+    // if not, redirect to login.php
+
+    header('location: login.php');
+
+}
+
+
+?><!DOCTYPE html>
 <html lang="en">
 
 <head>
