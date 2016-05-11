@@ -150,4 +150,21 @@ class User{
 
     }
 
+    public function changeSettings(){
+
+        $conn =  Db::getInstance();
+        $statement = $conn->prepare("select * from tblUser where username = :username");
+
+        $statement->bindValue(":username",$this->m_sUserName);
+
+        $statement->execute();
+
+        if( $statement->rowCount() > 0){
+            
+            $result = $statement->fetch(); // array van resultaten opvragen
+echo $result;
+        }
+
+    }
+
 }

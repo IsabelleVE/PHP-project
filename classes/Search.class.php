@@ -13,6 +13,5 @@ class Search
 
         $statement->bindValue(":username",$this->m_sUserName);
         $statement->execute();
-        }
     }
 }
