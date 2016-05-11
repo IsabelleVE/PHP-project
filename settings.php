@@ -1,18 +1,16 @@
 <?php
-$servername = "localhost";
-$username = "username";
-$password = "password";
-$dbname = "myDBPDO";
+include("classes/Db.class.php");
+
 
 try {
-    $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
-    // set the PDO error mode to exception
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    $conn =  Db::getInstance();
+    $statement = $conn->prepare("UPDATE MyGuests SET lastname='Doe' WHERE id=2");
 
-    $sql = "UPDATE MyGuests SET lastname='Doe' WHERE id=2";
+
+
 
     // Prepare statement
-    $stmt = $conn->prepare($sql);
+    $stmt = $conn->prepare($statement);
 
     // execute the query
     $stmt->execute();
@@ -22,7 +20,7 @@ try {
     }
 catch(PDOException $e)
     {
-    echo $sql . "<br>" . $e->getMessage();
+    echo $statement . "<br>" . $e->getMessage();
     }
 
 $conn = null;
