@@ -46,7 +46,7 @@ if( $statement->rowCount() > 0){
     border-radius: 5px;
     /* relative */
     width: 560px;
-    height: 380px;
+    height: 780px;
     margin-left: auto;
     margin-right: auto;
     margin-top: 30px;
@@ -74,6 +74,45 @@ if( $statement->rowCount() > 0){
             float: right;
             margin-top: -60px;
         }
+        
+        
+        
+.textbox{
+  height:50px;
+  width:100%;
+  border-radius:3px;
+  border:rgba(0,0,0,.3) 2px solid;
+  box-sizing:border-box;
+  padding:10px;
+  margin-bottom:30px;
+}
+
+.textbox:focus{
+  outline:none;
+   border:rgba(24,149,215,1) 2px solid;
+   color:rgba(24,149,215,1);
+}
+
+.button{
+  height:50px;
+  width:100%;
+  border-radius:3px;
+  border:rgba(0,0,0,.3) 0px solid;
+  box-sizing:border-box;
+  padding:10px;
+  margin-bottom:30px;
+  background:#90c843;
+  color:#FFF;
+  font-weight:bold;
+  font-size: 12pt;
+  transition:background .4s;
+  cursor:pointer;
+}
+
+.button:hover{
+  background:#80b438;
+  
+}
         
         
         footer{
@@ -117,25 +156,25 @@ footer h3
 
         <form class="password-form" method="POST" action="">
             <label>firstname :
-                <input type="text" name="firstname" value=<?php echo $result['firstname'] ?> >
+                <input class="textbox" type="text" name="firstname" value=<?php echo $result['firstname'] ?> >
             </label>
             <label>lastname :
-                <input type="text" name="lastname" value=<?php echo $result['lastname'] ?> >
+                <input class="textbox" type="text" name="lastname" value=<?php echo $result['lastname'] ?> >
             </label>
             <label>username :
-                <input type="text" name="username" value=<?php echo $result['username'] ?> >
+                <input class="textbox" type="text" name="username" value=<?php echo $result['username'] ?> >
             </label>
             <label>email :
-                <input type="email" name="email" value=<?php echo $result['email'] ?> >
+                <input class="textbox" type="email" name="email" value=<?php echo $result['email'] ?> >
             </label>
             
             <label>
-                <input type="password" name="oldPassword" placeholder="Old Password">
+                <input class="textbox" type="password" name="oldPassword" placeholder="Old Password">
             </label>
             <label>
-                <input type="password" name="newPassword" placeholder="New Password">
+                <input class="textbox" type="password" name="newPassword" placeholder="New Password">
             </label>
-            <input type="submit" value="Reset">
+            <input class="button" type="submit" value="Reset">
         </form>
     </section>
 
