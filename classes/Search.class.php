@@ -1,5 +1,5 @@
 <?php
-include("Db.class.php");
+include_once("Db.class.php");
 
 class Search
 {

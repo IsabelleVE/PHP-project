@@ -1,8 +1,19 @@
 <?php
-include("classes/Db.class.php");
-/*
+include_once("classes/Db.class.php");
+include_once("classes/User.class.php");
+/*if(!empty($_POST)){
 
-try {
+        $u = new User();
+        $u->Password= $_POST['oldPassword'];
+        $u->changeSettings();
+
+}*/
+$conn =  Db::getInstance();
+$statement = "SELECT * FROM tblUser WHERE userID = '1'";
+echo $statement;
+/*$stmt = $stmt->execute();
+echo $stmt;
+/*try {
     $conn =  Db::getInstance();
     $statement = $conn->prepare("UPDATE MyGuests SET lastname='Doe' WHERE id=2");
 
@@ -17,16 +28,16 @@ try {
 
     // echo a message to say the UPDATE succeeded
     echo $stmt->rowCount() . " records UPDATED successfully";
-    }
+}
 catch(PDOException $e)
-    {
+{
     echo $statement . "<br>" . $e->getMessage();
-    }
+}
 
 $conn = null;
+?>
 
 */
-
 ?>
 
 
@@ -123,7 +134,19 @@ footer h3
 
     
     <section class="login-form-wrap2">
-    
+
+        <form class="password-form" method="POST" action="">
+            <p>firstname : </p>
+            <p>lastname : </p>
+            <p>username : </p>
+            <label>
+                <input type="password" name="oldPassword" placeholder="Old Password">
+            </label>
+            <label>
+                <input type="password" name="newPassword" placeholder="New Password">
+            </label>
+            <input type="submit" value="Reset">
+        </form>
     </section>
 
 
