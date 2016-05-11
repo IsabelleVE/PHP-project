@@ -12,7 +12,7 @@ if(!empty($_POST)){
         if($u->canLogin()) {
             session_start();
             $_SESSION['loggedin'] = $_POST['username'];
-            header('location: wall.php');
+            header('location: settings.php');
         } else
         {
             throw new Exception("Your username or password was incorrect!");
@@ -61,7 +61,7 @@ if(!empty($_POST)){
             </label>
             <input type="submit" value="Login">
           </form>
-          <h5><a href="#">Forgot password</a></h5>
+          <h5><a href="#">Forgot password?</a></h5>
             <h5>Dont have an account?<a href="create_account.php">Sign up</a></h5>
         </section>
 </body>
