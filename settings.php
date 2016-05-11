@@ -9,39 +9,19 @@ include_once("classes/User.class.php");
 
 }*/
 $conn =  Db::getInstance();
-$statement = "SELECT * FROM tblUser WHERE userID = '1'";
-echo $statement;
-/*$stmt = $stmt->execute();
-echo $stmt;
-/*try {
-    $conn =  Db::getInstance();
-    $statement = $conn->prepare("UPDATE MyGuests SET lastname='Doe' WHERE id=2");
+$statement = $conn->prepare("SELECT * FROM tblUser WHERE userID = '2'");
+
+//$statement->bindValue(":username",$this->m_sUserName);
+
+$statement->execute();
+
+if( $statement->rowCount() > 0){
+
+    $result = $statement->fetch(); // array van resultaten opvragen
 
 
-
-
-    // Prepare statement
-    $stmt = $conn->prepare($statement);
-
-    // execute the query
-    $stmt->execute();
-
-    // echo a message to say the UPDATE succeeded
-    echo $stmt->rowCount() . " records UPDATED successfully";
 }
-catch(PDOException $e)
-{
-    echo $statement . "<br>" . $e->getMessage();
-}
-
-$conn = null;
-?>
-
-*/
-?>
-
-
-<!DOCTYPE html>
+?><!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -136,9 +116,19 @@ footer h3
     <section class="login-form-wrap2">
 
         <form class="password-form" method="POST" action="">
-            <p>firstname : </p>
-            <p>lastname : </p>
-            <p>username : </p>
+            <label>firstname :
+                <input type="text" name="firstname" value=<?php echo $result['firstname'] ?> >
+            </label>
+            <label>lastname :
+                <input type="text" name="lastname" value=<?php echo $result['lastname'] ?> >
+            </label>
+            <label>username :
+                <input type="text" name="username" value=<?php echo $result['username'] ?> >
+            </label>
+            <label>email :
+                <input type="email" name="email" value=<?php echo $result['email'] ?> >
+            </label>
+            
             <label>
                 <input type="password" name="oldPassword" placeholder="Old Password">
             </label>
