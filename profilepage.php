@@ -1,5 +1,5 @@
 <?php
-include("Db.class.php");
+include("classes/Db.class.php");
     if
     ($_FILES["file"]["error"] > 0
     ) {
