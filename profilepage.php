@@ -174,6 +174,11 @@ function showResult(str) {
     
 }
         
+        .search{
+            border: 2px solid #3f729b; 
+            border-radius: 1em; 
+        }
+        
         
 	</style> 
     
@@ -189,17 +194,19 @@ function showResult(str) {
         <a href="settings.php"><img class="settingsicon" src="images/settings-icon.png"></a>
 
     </div>
-
-</nav>
-
-<!-- SEARCH -->
+    
+    
+    <!-- SEARCH -->
 
 <form>
-<input type="text" size="30" onkeyup="showResult(this.value)">
+<input class="search" type="text" size="30" onkeyup="showResult(this.value)" placeholder="Search...">
 <div id="livesearch"></div>
 </form>
 
 <!-- END SEARCH -->
+
+</nav>
+
 
 <section class="login-form-wrap2">
 
