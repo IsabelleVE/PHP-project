@@ -1,8 +1,8 @@
 <?php
-/*$xmlDoc=new DOMDocument();
-$xmlDoc->load("profilepage.php");
+$xmlDoc=new DOMDocument();
+$xmlDoc->load("hashtagsearch.php");
 
-$x=$xmlDoc->getElementsByTagName('link');*/
+$x=$xmlDoc->getElementsByTagName('link');
 
 //get the q parameter from URL
 $q=$_GET["q"];
