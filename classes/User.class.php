@@ -169,12 +169,13 @@ class User{
     public function changeSettings(){
 
         $conn =  Db::getInstance();
-        $statement = $conn->prepare("UPDATE tblUser (email,username, firstname, lastname) VALUES (:email, :username, :firstname, :lastname) WHERE userID= :userID");
+        $statement = $conn->prepare("UPDATE tblUser SET email=:email, username= :username, firstname=:firstname, lastname=:lastname WHERE userID= :userID");
 
-        $statement->bindValue(":username",$this->m_sUserName);
         $statement->bindValue(":email",$this->m_sEmail);
+        $statement->bindValue(":username",$this->m_sUserName);
         $statement->bindValue(":firstname",$this->m_sFirstName);
         $statement->bindValue(":lastname",$this->m_sLastName);
+        $statement->bindValue(":userID",$this->m_iUserID);
         // $statement->bindValue(":password",$this->m_sPassword);
 
         if($statement->execute()){

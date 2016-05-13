@@ -2,7 +2,7 @@
 
 session_start();
 
-if( isset( $_SESSION['loggedin'] ) ){
+if( isset( $_SESSION['userID'] ) ){
 
 
 }
@@ -102,16 +102,13 @@ else{
     </nav>
 
 
-<<<<<<< Updated upstream
     <section class="wallpostalex">
-=======
-    <section class="">
 
->>>>>>> Stashed changes
+
         <ul>
             <li class="wallpost">
                 <div id="img-holder">
-                    <?php  echo "<img src=" . $newfilename . " />";?>
+                    <?php  //echo "<img src=" . $newfilename . " />";?>
                 </div>
 
                 <div id="comment-section">

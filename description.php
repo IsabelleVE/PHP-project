@@ -1,8 +1,9 @@
 <?php
-include_once("classes/Photo.class.php");
 session_start();
+include_once("classes/Photo.class.php");
 
-if( isset( $_SESSION['loggedin'] ) ){
+
+if( isset( $_SESSION['userID'] ) ){
 
 
 }
