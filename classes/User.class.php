@@ -181,8 +181,8 @@ class User{
         $statement->bindValue(":firstname",$this->m_sFirstName);
         $statement->bindValue(":lastname",$this->m_sLastName);
         $statement->bindValue(":userID",$this->m_iUserID);
-        if(!empty($code)){
-            $statement->bindValue(":password",$newPassword);
+        if(!empty($this->m_sPassword)){
+            $statement->bindValue(":newPassword",$newPassword);
         }
 
 
