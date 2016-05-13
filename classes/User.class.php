@@ -167,16 +167,24 @@ class User{
     }
 
     public function changeSettings(){
+        $code ='';
+        if(!empty($this->m_sPassword)){
+            $option = ['cost' => 12];
+            $newPassword = password_hash($this->m_sPassword,PASSWORD_DEFAULT,$option);
+            $code = ', password = :newPassword';
+        }
 
         $conn =  Db::getInstance();
-        $statement = $conn->prepare("UPDATE tblUser SET email=:email, username= :username, firstname=:firstname, lastname=:lastname WHERE userID= :userID");
-
+        $statement = $conn->prepare("UPDATE tblUser SET email=:email, username= :username, firstname=:firstname, lastname=:lastname ".$code." WHERE userID= :userID");
         $statement->bindValue(":email",$this->m_sEmail);
         $statement->bindValue(":username",$this->m_sUserName);
         $statement->bindValue(":firstname",$this->m_sFirstName);
         $statement->bindValue(":lastname",$this->m_sLastName);
         $statement->bindValue(":userID",$this->m_iUserID);
-        // $statement->bindValue(":password",$this->m_sPassword);
+        if(!empty($code)){
+            $statement->bindValue(":password",$newPassword);
+        }
+
 
         if($statement->execute()){
             return true;

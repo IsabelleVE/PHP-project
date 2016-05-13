@@ -24,6 +24,9 @@ if(!empty($_POST)){
     $u->Email = $_POST['email'];
     $u->UserName = $_POST['username'];
     $u->UserID = $_SESSION['userID'];
+    if(!empty($_POST['newPassword'])) {
+        $u->Password = $_POST['newPassword'];
+    }
     $u->changeSettings();
 
 }
@@ -198,10 +201,7 @@ footer h3
             <label>email :
                 <input class="textbox" type="email" name="email" value=<?php echo $result['email'] ?> >
             </label>
-            
-            <label>
-                <input class="textbox" type="password" name="oldPassword" placeholder="Old Password">
-            </label>
+
             <label>
                 <input class="textbox" type="password" name="newPassword" placeholder="New Password">
             </label>
