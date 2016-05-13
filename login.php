@@ -74,7 +74,11 @@ if(!empty($_POST)){
             <input type="submit" value="Login">
           </form>
           <h5><a href="#">Forgot password?</a></h5>
+<<<<<<< Updated upstream
             <h5 class="signupbutton">Dont have an account?<a href="create_account.php">Sign up</a></h5>
+=======
+            <h5>Dont have an account?<a href="createaccount.php">Sign up</a></h5>
+>>>>>>> Stashed changes
         </section>
 </body>
 </html>

@@ -84,7 +84,13 @@ else{
     <nav id="navigatie">
         <p>EXPERIENCE</p>
         <a href="wall.php"><img id="logoinsta" src="images/Instragram%20logo%202013.png"></a>
-        
+        <form action ="description.php" method ="post" enctype = "multipart/form-data">
+            <label for="file"> File to upload:</label>
+            <input type="file" name="file"/>
+            <br/>
+            <input type="submit" name="submit" value="upload Now" />
+
+        </form>
         <div class="uppericons">
            <a href="profilepage.php"><img class="profileicon" src="images/profileicon.png"></a>
            <a href="settings.php"><img class="settingsicon" src="images/settings-icon.png"></a>
@@ -96,11 +102,16 @@ else{
     </nav>
 
 
+<<<<<<< Updated upstream
     <section class="wallpostalex">
+=======
+    <section class="">
+
+>>>>>>> Stashed changes
         <ul>
             <li class="wallpost">
                 <div id="img-holder">
-
+                    <?php  echo "<img src=" . $newfilename . " />";?>
                 </div>
 
                 <div id="comment-section">
