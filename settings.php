@@ -1,7 +1,9 @@
 <?php
+session_start();
+
 include_once("classes/Db.class.php");
 include_once("classes/User.class.php");
-session_start();
+
 
 if( isset( $_SESSION['loggedin'] ) ){
 
@@ -13,15 +15,20 @@ else{
     header('location: login.php');
 
 }
-/*if(!empty($_POST)){
+if(!empty($_POST)){
 
         $u = new User();
-        $u->Password= $_POST['oldPassword'];
-        $u->changeSettings();
+    // $u->Password= $_POST['oldPassword'];
+    $u->FirstName = $_POST['firstname'];
+    $u->LastName = $_POST['lastname'];
+    $u->Email = $_POST['email'];
+    $u->UserName = $_POST['username'];
+    $u->UserID = $_SESSION['userID'];
+    $u->changeSettings();
 
-}*/
+}
 $conn =  Db::getInstance();
-$statement = $conn->prepare("SELECT * FROM tblUser WHERE userID = '2'");
+$statement = $conn->prepare("SELECT * FROM tblUser WHERE userID =" .$_SESSION['userID']);
 
 //$statement->bindValue(":username",$this->m_sUserName);
 

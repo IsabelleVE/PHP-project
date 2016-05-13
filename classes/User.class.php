@@ -3,11 +3,12 @@ include_once("Db.class.php");
 
 class User{
 
-    private  $m_sFirstName;
+    private $m_sFirstName;
     private $m_sLastName;
     private $m_sEmail;
     private $m_sUserName;
     private $m_sPassword;
+    private $m_iUserID;
 
     // s = string en v = vanalles en i = int
 
@@ -53,6 +54,15 @@ class User{
                 }
 
                 break;
+                
+             case "UserID":
+                if(!empty($p_vValue)){
+                    $this->m_iUserID = $p_vValue;
+                }else{
+                    throw new Exception("Gelieve alle velden in te vullen.");
+                }
+
+                break;
         }
     }
 
@@ -74,6 +84,9 @@ class User{
                 break;
             case "Password":
                 return $this->m_sPassword;
+                break;
+             case "UserID":
+                return $this->m_iUserID;
                 break;
         }
     }
@@ -135,12 +148,15 @@ class User{
 
                 $statement->bindValue(":username",$this->m_sUserName);
                 $statement->execute();
+        
 
                if( $statement->rowCount() > 0){
                    $result = $statement->fetch(); // array van resultaten opvragen
                    $password = $this->m_sPassword;
                    $hash = $result['password'];
+                   
                    if ( password_verify( $password, $hash) ){
+                       $_SESSION['userID'] = $result['userID'];
                        return true;
             } else{
                     return false;
@@ -153,16 +169,16 @@ class User{
     public function changeSettings(){
 
         $conn =  Db::getInstance();
-        $statement = $conn->prepare("select * from tblUser where username = :username");
+        $statement = $conn->prepare("UPDATE tblUser (email,username, firstname, lastname) VALUES (:email, :username, :firstname, :lastname) WHERE userID= :userID");
 
         $statement->bindValue(":username",$this->m_sUserName);
+        $statement->bindValue(":email",$this->m_sEmail);
+        $statement->bindValue(":firstname",$this->m_sFirstName);
+        $statement->bindValue(":lastname",$this->m_sLastName);
+        // $statement->bindValue(":password",$this->m_sPassword);
 
-        $statement->execute();
-
-        if( $statement->rowCount() > 0){
-            
-            $result = $statement->fetch(); // array van resultaten opvragen
-echo $result;
+        if($statement->execute()){
+            return true;
         }
 
     }

@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 include_once ("classes/User.class.php");
 
 
@@ -10,7 +10,7 @@ if(!empty($_POST)){
         $u->Password= $_POST['password'];
 
         if($u->canLogin()) {
-            session_start();
+            
             $_SESSION['loggedin'] = $_POST['username'];
             header('location: wall.php');
         } else
