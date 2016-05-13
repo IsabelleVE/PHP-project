@@ -99,6 +99,15 @@ function showResult(str) {
             margin-top: -60px;
         }
         
+        .logoutnav{
+            float: left;
+            display: inline-block;
+            margin-right: auto;
+            margin-left: 50px;
+            margin-top: -50px;
+        }
+        
+        
         /* Afbeelding Vrouw */
         
         .profilepic{
@@ -175,6 +184,9 @@ function showResult(str) {
 </form>
 
 <!-- END SEARCH -->
+
+
+<a class="logoutnav" style="color: #3f729b" href="logout.php">Logout</a>
 
 </nav>
 

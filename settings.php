@@ -87,6 +87,15 @@ if( $statement->rowCount() > 0){
             margin-top: -60px;
         }
         
+        .logoutnav{
+            float: left;
+            display: inline-block;
+            margin-right: auto;
+            margin-left: 50px;
+            margin-top: -50px;
+        }
+        
+        
         
         
 .textbox{
@@ -113,7 +122,7 @@ if( $statement->rowCount() > 0){
   box-sizing:border-box;
   padding:10px;
   margin-bottom:30px;
-  background:#90c843;
+  background: #3f729b;
   color:#FFF;
   font-weight:bold;
   font-size: 12pt;
@@ -159,6 +168,9 @@ footer h3
            <a href="profilepage.php"><img class="profileicon" src="images/profileicon.png"></a>
            <a href="settings.php"><img class="settingsicon" src="images/settings-icon.png"></a>
            </div>
+           
+           
+           <a class="logoutnav" style="color: #3f729b" href="logout.php">Logout</a>
            
     </nav>
     

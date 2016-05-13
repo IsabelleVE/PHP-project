@@ -46,6 +46,23 @@ else{
             margin-top: -60px;
         }
         
+        .logoutnav{
+            float: left;
+            display: inline-block;
+            margin-right: auto;
+            margin-left: 50px;
+            margin-top: -50px;
+        }
+        
+       .wallpost {
+        display: block;
+    margin-left: auto;
+    margin-right: auto;
+           text-align: center;
+   
+}
+        
+        
                       footer{
     background-color: #3f729b;
     display: block;
@@ -73,15 +90,13 @@ else{
            <a href="settings.php"><img class="settingsicon" src="images/settings-icon.png"></a>
            </div>
            
+           
+            <a class="logoutnav" style="color: #3f729b" href="logout.php">Logout</a>
+           
     </nav>
 
-    <section class="login-form-wrap" style="height: 156px">
-        <p class="message">Welcome back!</p>
-        <a style="color: black" href="logout.php">Logout</a>
-    </section>
 
-
-    <section class="">
+    <section class="wallpostalex">
         <ul>
             <li class="wallpost">
                 <div id="img-holder">
@@ -99,6 +114,7 @@ else{
             </li>
         </ul>
     </section>
+  
     
     
     <footer>

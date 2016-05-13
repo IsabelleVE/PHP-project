@@ -32,6 +32,18 @@ if(!empty($_POST)){
     <title>Instagram</title>
     <!-- LAYOUT BY ED BOND: http://codepen.io/edbond88/pen/yGjAu -->
     <link rel="stylesheet" href="css/instagram.css">
+    <style>
+    
+    .signupbutton{
+        color: white;
+        border: 2px solid red;
+        background-color: red;
+        border-radius: 1em;
+        padding: 4px;
+    }
+        
+    
+    </style>
 </head>
 <body>
         
@@ -62,7 +74,7 @@ if(!empty($_POST)){
             <input type="submit" value="Login">
           </form>
           <h5><a href="#">Forgot password?</a></h5>
-            <h5>Dont have an account?<a href="create_account.php">Sign up</a></h5>
+            <h5 class="signupbutton">Dont have an account?<a href="create_account.php">Sign up</a></h5>
         </section>
 </body>
 </html>
