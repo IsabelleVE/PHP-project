@@ -30,18 +30,25 @@ else
 {
 //check MIME TYPE - http://php.net/manual/en/function.finfo-open.php
     $allowedtypes = array("image/jpg", "image/jpeg", "image/png", "image/gif");
+    $path = $_FILES['file']['name'];
+    $ext = pathinfo($path, PATHINFO_EXTENSION);
     $filename = $_FILES["file"]["tmp_name"];
     $finfo = new finfo(FILEINFO_MIME_TYPE);
     $fileinfo = $finfo->file($filename);
     if (in_array($fileinfo, $allowedtypes))
     {
 //move uploaded files
-        $newfilename = "files/" . $_FILES["file"]["name"];
+        $newfilename = "files/" . date('YmdHis'). $_SESSION['userID'].'.'.$ext;
         if
         (move_uploaded_file($_FILES["file"]["tmp_name"], $newfilename))
         {
             $msg = "Upload gelukt!";
             echo "<img src=" . $newfilename . " />";
+            $p = new Photo();
+            $p->Description = $_POST['description'];
+            $p->Photo = $newfilename;
+            $p->UserID = $_SESSION['userID'];
+            $p->SavePhoto();
         }
         else
         {
@@ -54,16 +61,16 @@ else
     }
 }
 echo $msg . "<br />";
-$username = $_SESSION["loggedin"];
-echo $username;
-if(!empty($_POST)){
+
+/*if(!empty($_POST)){
 
         $p = new Photo();
         $p->description = $_POST['description'];
-    $p->description =$_POST['username'];
     $p->SavePhoto();
 
 }
+
+echo 'Now:       '. date('Y-m-d-H:i:s') ."\n";*/
 
 
 ?>

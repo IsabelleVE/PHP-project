@@ -87,6 +87,7 @@ else{
         <form action ="description.php" method ="post" enctype = "multipart/form-data">
             <label for="file"> File to upload:</label>
             <input type="file" name="file"/>
+            <input type="text" id="description" placeholder="Description">
             <br/>
             <input type="submit" name="submit" value="upload Now" />
 
