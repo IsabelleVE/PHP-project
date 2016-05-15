@@ -14,6 +14,29 @@ else{
 }
 
 
+    // COMMENTS PLAATSEN
+/*
+include_once("classes/Activity.class.php");
+$activity = new Activity();
+
+//controleer of er een update wordt verzonden
+if(!empty($_POST['activitymessage']))
+{
+    $activity->Text = $_POST['activitymessage'];
+    try
+    {
+        $activity->Save();
+    }
+    catch (Exception $e)
+    {
+        $feedback = $e->getMessage();
+    }
+}
+
+$recentActivities = $activity->GetRecentActivities();
+*/
+    // EINDE COMMENTS PLAATSEN
+
 ?><!DOCTYPE html>
 <html lang="en">
 
@@ -21,7 +44,40 @@ else{
     <meta charset="UTF-8">
     <title>Instagram</title>
     <link rel="stylesheet" href="css/instagram.css">
-    
+    <script>
+
+
+        $(document).ready(function(){
+
+            $("#btnSubmit").on("click", function(e){
+
+                var message = $("#activitymessage").val();
+                $.post( "ajax/savemessage.php", {message: message })
+                    .done(function( response ) {
+
+                        if(response.status == "success") {
+
+                            var li = "<li style='display:none;'><h2>GoodBytes.be</h2> " + response.message + "</li>";
+                            $("ul#listupdates").prepend(li);
+                            $("ul#listupdates li:first-child").slideDown();
+                            $("ul#listupdates li").last().slideUp(function(){
+
+                                $(this).remove();
+                            });
+
+                        }
+                        else {
+                            // foutmelding geven
+                        }
+                    });
+
+                e.preventDefault();
+
+            })
+        })
+
+
+    </script>
     <style type="text/css">
         
         
@@ -114,13 +170,36 @@ else{
 
                 <div id="comment-section">
                     <p>This is a comment!! #YOLO</p>
-                    <form action="">
-                        <a href="#" id="like-btn">Like</a>
-                        <input type="text" placeholder="Comment" id="activitymessage" name="activitymessage" />
-                        <input id="btnSubmit" type="submit" value="Place" />
+
+                    <form method="post" action="">
+                        <div class="statusupdates">
+                            <h1>GoodBytes.be</h1>
+                            <input type="text" value="What's on your mind?" id="activitymessage" name="activitymessage" />
+                            <input id="btnSubmit" type="submit" value="Share" />
+
+                            <ul id="listupdates">
+                                <?php
+                                if(count($recentActivities) > 0)
+                                {
+                                    foreach($recentActivities as $key=>$singleActivity)
+                                    {
+                                        echo "<li><h2>GoodBytes.be</h2> ". $singleActivity['activity_description'] ."</li>";
+                                    }
+                                }
+                                else
+                                {
+                                    echo "<li>Waiting for first status update</li>";
+                                }
+                                ?>
+                            </ul>
+
+                        </div>
                     </form>
+
                 </div>
             </li>
+
+
         </ul>
     </section>
   
