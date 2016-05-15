@@ -73,9 +73,17 @@ class Photo
 
 
 
-   /* public function ShowPhoto()
+    public function ShowPhoto()
     {
-        $conn =  Db::getInstance();
-    }*/
+        $conn = Db::getInstance();
+        $statement = $conn->prepare("select  from tblPost where userID= :userID");
+        $statement->bindValue(":userID", $this->m_iUserID);
+        $statement->execute();
+        if( $statement->rowCount() > 0){
+            $result = $conn->query($statement);
+            return $result;
 
+        }
+
+    }
 }
