@@ -44,11 +44,13 @@ else
         {
             $msg = "Upload gelukt!";
             echo "<img src=" . $newfilename . " />";
-            $p = new Photo();
-            $p->Description = $_POST['description'];
-            $p->Photo = $newfilename;
-            $p->UserID = $_SESSION['userID'];
-            $p->SavePhoto();
+            if(!empty($_POST)) {
+                $p = new Photo();
+                $p->Description = $_POST['description'];
+                $p->Photo = $newfilename;
+                $p->UserID = $_SESSION['userID'];
+                $p->SavePhoto();
+            }
         }
         else
         {
@@ -62,16 +64,6 @@ else
 }
 echo $msg . "<br />";
 
-/*if(!empty($_POST)){
-
-        $p = new Photo();
-        $p->description = $_POST['description'];
-    $p->SavePhoto();
-
-}
-
-echo 'Now:       '. date('Y-m-d-H:i:s') ."\n";*/
-
 
 ?>
 <!doctype html>
@@ -82,7 +74,13 @@ echo 'Now:       '. date('Y-m-d-H:i:s') ."\n";*/
 </head>
 <body>
 
-<input type="text" id="description" placeholder="Description">
-<a href="wall.php" ><input type="submit" value="Post"></a>
+<form action ="description.php" method ="POST" enctype = "multipart/form-data">
+    <label for="file"> File to upload:</label>
+    <input type="file" name="file"/>
+    <input type="text" id="description" name="description" placeholder="Description">
+    <br/>
+    <input type="submit" name="submit" value="upload Now" />
+
+</form>
 </body>
 </html>

@@ -15,6 +15,9 @@ class Photo
             case "Photo":
                 $this->m_sPhoto = $p_vValue;
                 break;
+            case "UserID":
+                    $this->m_iUserID = $p_vValue;
+                break;
         }
 
     }
@@ -27,6 +30,9 @@ class Photo
             case "Photo":
                 return $this->m_sPhoto;
                 break;
+            case "UserID":
+                return $this->m_iUserID;
+                break;
         }
     }
     public function SavePhoto()
@@ -36,7 +42,7 @@ class Photo
         $conn =  Db::getInstance();
 
         $statement = $conn->prepare("select * from tblPost where userID= :userID");
-        $statement->bindValue(":userID",$this->m_sUserID);
+        $statement->bindValue(":userID",$this->m_iUserID);
         $statement->execute();
 
 
