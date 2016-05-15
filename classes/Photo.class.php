@@ -5,7 +5,9 @@ class Photo
 {
     private  $m_sDescription;
     private  $m_sPhoto;
+    private $m_iPostID;
     private $m_iUserID;
+    private $m_dUploadTime;
 
     public function __set($p_sProperty, $p_vValue){
         switch($p_sProperty) {
@@ -17,6 +19,12 @@ class Photo
                 break;
             case "UserID":
                     $this->m_iUserID = $p_vValue;
+                break;
+            case "PostID":
+                $this->m_iPostID = $p_vValue;
+                break;
+            case "UploadTime":
+                $this->m_dUploadTime = $p_vValue;
                 break;
         }
 
@@ -32,6 +40,12 @@ class Photo
                 break;
             case "UserID":
                 return $this->m_iUserID;
+                break;
+            case "PostID":
+                return $this->m_iPostID;
+                break;
+            case "UploadTime":
+                return $this->m_dUploadTime;
                 break;
         }
     }
@@ -51,14 +65,16 @@ class Photo
                             (
                             description,
                             photo,
-                            userID
+                            userID,
+                            uploadTime
 
                             )
                             VALUES
                             (
                             :description,
                             :photo,
-                            :userID
+                            :userID,
+                            :uploadTime
 
                             )
                             ");
@@ -66,6 +82,7 @@ class Photo
             $statement->bindValue(":description",$this->m_sDescription);
             $statement->bindValue(":photo",$this->m_sPhoto);
             $statement->bindValue(":userID",$this->m_iUserID);
+            $statement->bindValue(":uploadTime",$this->m_dUploadTime);
             $statement->execute();
 
 
@@ -73,16 +90,35 @@ class Photo
 
 
 
-    public function ShowPhoto()
+    public function ShowProfilePhotos()
     {
         $conn = Db::getInstance();
-        $statement = $conn->prepare("select  from tblPost where userID= :userID");
+        $statement = $conn->prepare("select * from tblPost where userID= :userID");
         $statement->bindValue(":userID", $this->m_iUserID);
         $statement->execute();
         if( $statement->rowCount() > 0){
-            $result = $conn->query($statement);
+            $result = $statement->fetchAll();
             return $result;
 
+        }
+            else{
+                return "No photos found";
+            }
+
+    }
+
+    public function  ShowPhotoDetails(){
+        $conn = Db::getInstance();
+        $statement = $conn->prepare("select * from tblPost where postID= :postID");
+        $statement->bindValue(":postID", $this->m_iPostID);
+        $statement->execute();
+        if( $statement->rowCount() > 0){
+            $result = $statement->fetch();
+            return $result;
+
+        }
+        else{
+            return "No photo found";
         }
 
     }

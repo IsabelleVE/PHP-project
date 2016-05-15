@@ -1,18 +1,19 @@
 <?php
 include_once("classes/Db.class.php");
+    include_once ("classes/User.class.php");
+include_once ("classes/Photo.class.php");
 session_start();
 
-if( isset( $_SESSION['loggedin'] ) ){
-
-
-}
-else{
-    // if not, redirect to login.php
-
+if( !isset( $_SESSION['userID'] ) ){
     header('location: login.php');
 
 }
-
+$u = new User();
+    $u->UserID = $_GET["userID"];
+   $userDetails = $u->getUserDetails();
+    $p = new Photo();
+    $p->UserID = $_GET["userID"];
+    $profilePhotos = $p->ShowProfilePhotos();
 
 ?><!DOCTYPE html>
 <html lang="en">
@@ -56,7 +57,6 @@ function showResult(str) {
         
        
 	.login-form-wrap2 {
-        display: block;
     background: grey;
     background: -moz-radial-gradient(center, ellipse cover, white 0%, white 100%);
     background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%, white), color-stop(100%, white));
@@ -69,8 +69,7 @@ function showResult(str) {
     box-shadow: 0 1px white inset, 0 0 10px 5px rgba(0, 0, 0, 0.1);
     border-radius: 5px;
     /* relative */
-    width: 860px;
-    height: 2080px;
+    max-width: 860px;
     margin-left: auto;
     margin-right: auto;
     margin-top: 30px;
@@ -125,7 +124,7 @@ function showResult(str) {
             
         }
         
-        .discription{
+        .description{
             text-align: left;
         }
         
@@ -158,8 +157,22 @@ function showResult(str) {
             border: 2px solid #3f729b; 
             border-radius: 1em; 
         }
-        
-        
+    .userPhotos{
+        clear: both;
+        display: flex;
+        justify-content: space-between;
+        flex-wrap: wrap;
+    }
+        .userPhotos div{
+            width: 32%;
+            margin-bottom: 15px;
+        }
+    img {
+        max-width: 100%;
+        max-height: 100%;
+        width: auto;
+        height: auto;
+    }
 	</style> 
     
     
@@ -193,22 +206,20 @@ function showResult(str) {
 
 <section class="login-form-wrap2">
 
-    <img class="profilepic" src="../PHP-project/images/vrouw-profilepic.png" alt="Profilepic">
+    <img class="profilepic" src="files/profilepics/<?php echo $userDetails['profilpic'] ?>" alt="Profilepic">
 
     <div class="accountanddiscription">
-        <h3 class="accountname">ACCOUNT NAME</h3>
-        <p class="discription">Discription: Dit is een faketekst. Alles wat hier staat is slechts om een indruk te geven van het grafische effect van tekst op deze plek. Wat u hier leest is een voorbeeldtekst. Deze wordt later vervangen door de uiteindelijke tekst, die nu nog niet bekend is. De faketekst is dus een tekst die eigenlijk nergens over gaat. Het grappige is, dat mensen deze toch vaak lezen. Zelfs als men weet dat het om een faketekst gaat, lezen ze toch door.</p>
+        <h3 class="accountname"><?php echo $userDetails['username']?></h3>
+        <p class="description">Description: <?php echo $userDetails['description'] ?></p>
 
-        <a href="#" alt="Edit Profile"><img class="editprofile" src="../PHP-project/images/edit-profile-button.png"></a>
     </div>
-    <br/>
-    <form action ="1-uploadform.code.php" method ="post" enctype = "multipart/form-data">
-        <label for="file"> File to upload:</label>
-        <input type="file" name="file"/>
-        <br/>
-        <input type="submit" name="submit" value="upload Now" />
-
-    </form>
+<article class="userPhotos">
+    <?php foreach($profilePhotos as $profilePhoto): ?>
+       <div>
+           <a href="photo.php?postID=<?php echo $profilePhoto['postID']?>"><img src="files/<?php echo $profilePhoto['photo']; ?>" alt=""></a>
+           </div>
+    <?php endforeach; ?>
+</article>
 </section>
 
 

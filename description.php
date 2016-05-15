@@ -1,6 +1,7 @@
 <?php
 session_start();
 include_once("classes/Photo.class.php");
+include_once("classes/Db.class.php");
 
 
 if( isset( $_SESSION['userID'] ) ){
@@ -13,58 +14,52 @@ else{
     header('location: login.php');
 
 }
-if
-($_FILES["file"]["error"] > 0
-) {
+if (!empty ($_POST) ){
+    if
+    ($_FILES["file"]["error"] > 0
+    ) {
 //for error messages: see http://php.net/manual/en/features.file-upload.errors.php
-    switch ($_FILES["file"]["error"]) {
-        case 1:
-            $msg = "U mag maximaal 2MB opladen.";
-            break;
-        default:
-            $msg = "Sorry, uw upload kon niet worden verwerkt.";
-    }
-}
-
-else
-{
+        switch ($_FILES["file"]["error"]) {
+            case 1:
+                $msg = "U mag maximaal 2MB opladen.";
+                break;
+            default:
+                $msg = "Sorry, uw upload kon niet worden verwerkt.";
+        }
+    } else {
 //check MIME TYPE - http://php.net/manual/en/function.finfo-open.php
-    $allowedtypes = array("image/jpg", "image/jpeg", "image/png", "image/gif");
-    $path = $_FILES['file']['name'];
-    $ext = pathinfo($path, PATHINFO_EXTENSION);
-    $filename = $_FILES["file"]["tmp_name"];
-    $finfo = new finfo(FILEINFO_MIME_TYPE);
-    $fileinfo = $finfo->file($filename);
-    if (in_array($fileinfo, $allowedtypes))
-    {
+        $allowedtypes = array("image/jpg", "image/jpeg", "image/png", "image/gif");
+        $path = $_FILES['file']['name'];
+        $ext = pathinfo($path, PATHINFO_EXTENSION);
+        $filename = $_FILES["file"]["tmp_name"];
+        $finfo = new finfo(FILEINFO_MIME_TYPE);
+        $fileinfo = $finfo->file($filename);
+        if (in_array($fileinfo, $allowedtypes)) {
 //move uploaded files
-        $newfilename = "files/" . date('YmdHis'). $_SESSION['userID'].'.'.$ext;
-        if
-        (move_uploaded_file($_FILES["file"]["tmp_name"], $newfilename))
-        {
-            $msg = "Upload gelukt!";
-            echo "<img src=" . $newfilename . " />";
-            if(!empty($_POST)) {
-                $p = new Photo();
-                $p->Description = $_POST['description'];
-                $p->Photo = $newfilename;
-                $p->UserID = $_SESSION['userID'];
-                $p->SavePhoto();
+            $newfilename = date('YmdHis') . $_SESSION['userID'] . '.' . $ext;
+
+            if
+            (move_uploaded_file($_FILES["file"]["tmp_name"], "files/" . $newfilename)) {
+                $msg = "Upload gelukt!";
+
+                if (!empty($_POST)) {
+                    $p = new Photo();
+                    $p->Description = $_POST['description'];
+                    $p->Photo = $newfilename;
+                    $p->UploadTime = date('YmdHis');
+                    $p->UserID = $_SESSION['userID'];
+                    $p->SavePhoto();
+
+                }
+            } else {
+                $msg = "Sorry, de upload is mislukt.";
             }
-        }
-        else
-        {
-            $msg = "Sorry, de upload is mislukt.";
+        } else {
+            $msg = "Sorry, enkel afbeeldingen zijn toegestaan.";
         }
     }
-    else
-    {
-        $msg = "Sorry, enkel afbeeldingen zijn toegestaan.";
-    }
+    echo $msg . "<br />";
 }
-echo $msg . "<br />";
-
-
 ?>
 <!doctype html>
 <html lang="en">
@@ -81,6 +76,7 @@ echo $msg . "<br />";
     <br/>
     <input type="submit" name="submit" value="upload Now" />
 
-</form>
+    </form>
+<img src="files/<?php echo $newfilename;?>" alt="">
 </body>
 </html>

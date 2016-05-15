@@ -192,4 +192,13 @@ class User{
 
     }
 
+    public function getUserDetails(){
+        $conn = Db::getInstance();
+        $statement = $conn->prepare("select * from tblUser where userID = :userID");
+        $statement->bindValue(":userID",$this->m_iUserID);
+        $statement->execute();
+        $result =  $statement->fetch();
+        return $result;
+    }
+
 }
