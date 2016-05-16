@@ -16,6 +16,36 @@ $photoDetail = $p->ShowPhotoDetails();
 $u = new User();
 $u->UserID = $photoDetail['userID'];
 $userDetails = $u->getUserDetails();
+
+
+/* PHP COMMENT */
+
+// COMMENTS PLAATSEN
+
+
+$comment = new Comment();
+
+//controleer of er een update wordt verzonden
+if(!empty($_POST['commentmessage']))
+{
+    $comment->Comment = $_POST['commentmessage'];
+    $comment->Comment = $_SESSION['userID'];
+    try
+    {
+        $comment->saveComment();
+    }
+    catch (Exception $e)
+    {
+        // $feedback = $e->removeComment();
+    }
+}
+
+$recentComments = $comment->showComments();
+
+// EINDE COMMENTS PLAATSEN
+
+
+
 ?><!doctype html>
 <html lang="en">
 <head>
@@ -158,6 +188,35 @@ $userDetails = $u->getUserDetails();
 
 
     </article>
+
+    <!-- Hier begint de comment !-->
+
+    <form method="post" action="">
+        <div class="statusupdates">
+            <h1>GoodBytes.be</h1>
+            <input type="text" placeholder="What's on your mind?" id="commentmessage" name="commentmessage" />
+            <input id="btnSubmit" type="submit" value="Share" />
+
+            <ul id="listupdates">
+                <?php
+                if(count($recentComments) > 0)
+                {
+                    foreach($recentComments as $key=>$singleComment)
+                    {
+                        echo "<li><h2>GoodBytes.be</h2> ". $singleComment['comment_description'] ."</li>";
+                    }
+                }
+                else
+                {
+                    echo "<li>Waiting for first status update</li>";
+                }
+                ?>
+            </ul>
+
+        </div>
+    </form>
+
+
 </section>
 
 
