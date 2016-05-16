@@ -15,8 +15,8 @@ class Comment {
             case "CommentId":
                 $this->m_iCommentId = $p_vValue;
                 break;
-            case "FotoId":
-                $this->m_iFotoId = $p_vValue;
+            case "PostId":
+                $this->m_iPostId = $p_vValue;
                 break;
             case "UserId":
                 $this->m_iUserId = $p_vValue;
@@ -32,8 +32,8 @@ class Comment {
             case "CommentId":
                 return $this->m_iCommentId;
                 break;
-            case "FotoId":
-                return $this->m_iFotoId;
+            case "PostId":
+                return $this->m_iPostId;
                 break;
             case "UserId":
                 return $this->m_iUserId;

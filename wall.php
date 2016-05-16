@@ -2,35 +2,16 @@
 
 session_start();
 include_once("classes/Comment.class.php");
+include_once ("classes/Photo.class.php");
 if( !isset( $_SESSION['userID'] ) ){
     header('location: login.php');
 
 }
 
+$p = new Photo();
+$p->UserID = $_SESSION["userID"];
+$profilePhotos = $p->ShowProfilePhotos();
 
-    // COMMENTS PLAATSEN
-
-/*
-$comment = new Comment();
-
-//controleer of er een update wordt verzonden
-if(!empty($_POST['commentmessage']))
-{
-    $comment->Comment = $_POST['commentmessage'];
-    $comment->Comment = $_SESSION['userID'];
-    try
-    {
-        $comment->saveComment();
-    }
-    catch (Exception $e)
-    {
-       // $feedback = $e->removeComment();
-    }
-}
-
-$recentComments = $comment->showComments();
-*/
-    // EINDE COMMENTS PLAATSEN
 
 ?><!DOCTYPE html>
 <html lang="en">
@@ -39,40 +20,7 @@ $recentComments = $comment->showComments();
     <meta charset="UTF-8">
     <title>Instagram</title>
     <link rel="stylesheet" href="css/instagram.css">
-    <script>
 
-
-        $(document).ready(function(){
-
-            $("#btnSubmit").on("click", function(e){
-
-                var message = $("#activitymessage").val();
-                $.post( "ajax/savemessage.php", {message: message })
-                    .done(function( response ) {
-
-                        if(response.status == "success") {
-
-                            var li = "<li style='display:none;'><h2>GoodBytes.be</h2> " + response.message + "</li>";
-                            $("ul#listupdates").prepend(li);
-                            $("ul#listupdates li:first-child").slideDown();
-                            $("ul#listupdates li").last().slideUp(function(){
-
-                                $(this).remove();
-                            });
-
-                        }
-                        else {
-                            // foutmelding geven
-                        }
-                    });
-
-                e.preventDefault();
-
-            })
-        })
-
-
-    </script>
     <style type="text/css">
         
         
@@ -159,30 +107,13 @@ $recentComments = $comment->showComments();
                 <div id="comment-section">
                     <p>This is a comment!! #YOLO</p>
 
-                    <form method="post" action="">
-                        <div class="statusupdates">
-                            <h1>GoodBytes.be</h1>
-                            <input type="text" placeholder="What's on your mind?" id="commentmessage" name="commentmessage" />
-                            <input id="btnSubmit" type="submit" value="Share" />
-
-                            <ul id="listupdates">
-                                <?php
-                                if(count($recentComments) > 0)
-                                {
-                                    foreach($recentComments as $key=>$singleComment)
-                                    {
-                                        echo "<li><h2>GoodBytes.be</h2> ". $singleComment['comment_description'] ."</li>";
-                                    }
-                                }
-                                else
-                                {
-                                    echo "<li>Waiting for first status update</li>";
-                                }
-                                ?>
-                            </ul>
-
-                        </div>
-                    </form>
+                    <article class="userPhotos">
+                        <?php foreach($profilePhotos as $profilePhoto): ?>
+                            <div>
+                                <a href="photo.php?postID=<?php echo $profilePhoto['postID']?>"><img src="files/<?php echo $profilePhoto['photo']; ?>" alt=""></a>
+                            </div>
+                        <?php endforeach; ?>
+                    </article>
 
                 </div>
             </li>

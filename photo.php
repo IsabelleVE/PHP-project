@@ -2,6 +2,7 @@
 
 include_once ("classes/User.class.php");
 include_once ("classes/Photo.class.php");
+include_once("classes/Comment.class.php");
 session_start();
 
 if( !isset( $_SESSION['userID'] ) ){
