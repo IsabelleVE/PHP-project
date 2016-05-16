@@ -10,7 +10,7 @@ if( !isset( $_SESSION['userID'] ) ){
 
     // COMMENTS PLAATSEN
 
-
+/*
 $comment = new Comment();
 
 //controleer of er een update wordt verzonden
@@ -29,7 +29,7 @@ if(!empty($_POST['commentmessage']))
 }
 
 $recentComments = $comment->showComments();
-
+*/
     // EINDE COMMENTS PLAATSEN
 
 ?><!DOCTYPE html>
@@ -135,14 +135,7 @@ $recentComments = $comment->showComments();
     <nav id="navigatie">
         <p>EXPERIENCE</p>
         <a href="wall.php"><img id="logoinsta" src="images/Instragram%20logo%202013.png"></a>
-        <form action ="description.php" method ="post" enctype = "multipart/form-data">
-            <label for="file"> File to upload:</label>
-            <input type="file" name="file"/>
-            <input type="text" id="description" placeholder="Description">
-            <br/>
-            <input type="submit" name="submit" value="upload Now" />
-
-        </form>
+        <a class="fotoknop" href="description.php">Plaats Foto!</a>
         <div class="uppericons">
            <a href="profilepage.php"><img class="profileicon" src="images/profileicon.png"></a>
            <a href="settings.php"><img class="settingsicon" src="images/settings-icon.png"></a>

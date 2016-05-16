@@ -65,9 +65,25 @@ if (!empty ($_POST) ){
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Document</title>
+    <title>Description</title>
+    <link rel="stylesheet" href="css/instagram.css">
 </head>
 <body>
+
+<nav id="navigatie">
+    <p>EXPERIENCE</p>
+    <a href="wall.php"><img id="logoinsta" src="images/Instragram%20logo%202013.png"></a>
+    <a class="fotoknop" href="description.php">Plaats Foto!</a>
+    <div class="uppericons">
+        <a href="profilepage.php"><img class="profileicon" src="images/profileicon.png"></a>
+        <a href="settings.php"><img class="settingsicon" src="images/settings-icon.png"></a>
+    </div>
+
+
+    <a class="logoutnav" style="color: #3f729b" href="logout.php">Logout</a>
+
+</nav>
+
 
 <form action ="description.php" method ="POST" enctype = "multipart/form-data">
     <label for="file"> File to upload:</label>
@@ -78,5 +94,11 @@ if (!empty ($_POST) ){
 
     </form>
 <img src="files/<?php echo $newfilename;?>" alt="">
+
+
+<footer>
+
+    <h3> &copy; <p> Instagram 2015 - 2016 </p>  </h3>
+</footer>
 </body>
 </html>
