@@ -16,24 +16,24 @@ else{
 
     // COMMENTS PLAATSEN
 /*
-include_once("classes/Activity.class.php");
-$activity = new Activity();
+include_once("classes/Comment.class.php");
+$comment = new Comment();
 
 //controleer of er een update wordt verzonden
-if(!empty($_POST['activitymessage']))
+if(!empty($_POST['commentmessage']))
 {
-    $activity->Text = $_POST['activitymessage'];
+    $comment->Comment = $_POST['commentmessage'];
     try
     {
-        $activity->Save();
+        $comment->saveComment();
     }
     catch (Exception $e)
     {
-        $feedback = $e->getMessage();
+        $feedback = $e->removeComment();
     }
 }
 
-$recentActivities = $activity->GetRecentActivities();
+$recentComments = $comment->showComments();
 */
     // EINDE COMMENTS PLAATSEN
 
@@ -174,16 +174,16 @@ $recentActivities = $activity->GetRecentActivities();
                     <form method="post" action="">
                         <div class="statusupdates">
                             <h1>GoodBytes.be</h1>
-                            <input type="text" value="What's on your mind?" id="activitymessage" name="activitymessage" />
+                            <input type="text" value="What's on your mind?" id="commentmessage" name="commentmessage" />
                             <input id="btnSubmit" type="submit" value="Share" />
 
                             <ul id="listupdates">
                                 <?php
-                                if(count($recentActivities) > 0)
+                                if(count($recentComments) > 0)
                                 {
-                                    foreach($recentActivities as $key=>$singleActivity)
+                                    foreach($recentComments as $key=>$singleComment)
                                     {
-                                        echo "<li><h2>GoodBytes.be</h2> ". $singleActivity['activity_description'] ."</li>";
+                                        echo "<li><h2>GoodBytes.be</h2> ". $singleComment['comment_description'] ."</li>";
                                     }
                                 }
                                 else
