@@ -84,17 +84,19 @@ if (!empty ($_POST) ){
 
 </nav>
 
+<section class="login-form-wrap3">
 
 <form action ="description.php" method ="POST" enctype = "multipart/form-data">
     <label for="file"> File to upload:</label>
     <input type="file" name="file"/>
     <input type="text" id="description" name="description" placeholder="Description">
     <br/>
-    <input type="submit" name="submit" value="upload Now" />
+    <input class="uploadbutton" type="submit" name="submit" value="upload Now" />
 
     </form>
 <img src="files/<?php echo $newfilename;?>" alt="">
 
+    </section>
 
 <footer>
 
