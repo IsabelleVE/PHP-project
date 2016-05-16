@@ -5,7 +5,7 @@ include_once("Db.class.php");
 
 class Comment {
     private $m_iCommentId;
-    private $m_iFotoId;
+    private $m_iPostId;
     private $m_iUserId;
     private $m_sComment;
 
@@ -45,40 +45,50 @@ class Comment {
         return $this;
     }
 
-    public function saveComment() {
-        $PDO = Db::getInstance();
 
-        $stmt = $PDO->prepare("INSERT INTO comments(userId, fotoId, comment) VALUES (:userId, :fotoId, :commentaar)");
+
+    public function saveComment() {
+        $conn =  Db::getInstance();
+        $stmt = $conn->prepare("select * from tblComment where postID= :postID");
+        $stmt->bindValue(":postID",$this->m_iPostId);
+        $stmt->execute();
+
+        $stmt = $conn->prepare("INSERT INTO tblComment (
+                            userID,
+                            postID,
+                            comment
+
+                            )VALUES (:userId, :fotoId, :commentaar)");
         $stmt->bindValue(":userId", $this->m_iUserId);
-        $stmt->bindValue(":fotoId", $this->m_iFotoId);
+        $stmt->bindValue(":fotoId", $this->m_iPostId);
         $stmt->bindValue(":commentaar", $this->m_sComment);
-        if($stmt->execute()) {
-            $this->m_iCommentId = $PDO->lastInsertId();
-            return true;
-        } else {
-            throw new Exception('The comment can not be saved, sorry!');
-        }
+        $stmt->execute();
     }
 
-    public function removeComment() {
+   /* public function removeComment() {
         $PDO = Db::getInstance();
 
-        $stmt = $PDO->prepare("DELETE FROM comments WHERE commentId = :commentId");
-        $stmt->bindValue(':commentId', $this->m_iCommentId, PDO::PARAM_INT);
+        $stmt = $PDO->prepare("DELETE FROM tblComment WHERE commentID = :commentId");
+        $stmt->bindValue(':commentId', $this->m_iCommentId);
         if($stmt->execute()) {
             return true;
         } else {
             throw new Exception('Comment can not be romoved');
         }
-    }
+    }*/
 
     public function showComments() {
-        $PDO = Db::getInstance();
+        $conn = Db::getInstance();
+        $statement = $conn->prepare("select * from tblComment where commentID = :commentId");
+        $statement->bindValue(':commentId', $this->m_iCommentId);
+        $statement->execute();
+        if( $statement->rowCount() > 0){
+            $result = $statement->fetchAll();
+            return $result;
 
-        $stmt = $PDO->prepare("SELECT c.commentId, c.comment, u.id, u.username FROM comments AS c JOIN users AS u ON(c.userId = u.id) WHERE fotoId = :fotoId");
-        $stmt->bindValue(':fotoId', $this->m_iFotoId, PDO::PARAM_INT);
-        $stmt->execute();
-        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        return $result;
+        }
+        else{
+            return "No photo found";
+        }
     }
 }

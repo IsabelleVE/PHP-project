@@ -1,40 +1,35 @@
 <?php
 
 session_start();
-
-if( isset( $_SESSION['userID'] ) ){
-
-
-}
-else{
-    // if not, redirect to login.php
-
+include_once("classes/Comment.class.php");
+if( !isset( $_SESSION['userID'] ) ){
     header('location: login.php');
 
 }
 
 
     // COMMENTS PLAATSEN
-/*
-include_once("classes/Comment.class.php");
+
+
 $comment = new Comment();
 
 //controleer of er een update wordt verzonden
 if(!empty($_POST['commentmessage']))
 {
     $comment->Comment = $_POST['commentmessage'];
+    $comment->Comment = $_SESSION['userID'];
     try
     {
         $comment->saveComment();
     }
     catch (Exception $e)
     {
-        $feedback = $e->removeComment();
+       // $feedback = $e->removeComment();
     }
 }
 
 $recentComments = $comment->showComments();
-*/
+
     // EINDE COMMENTS PLAATSEN
 
 ?><!DOCTYPE html>
@@ -174,7 +169,7 @@ $recentComments = $comment->showComments();
                     <form method="post" action="">
                         <div class="statusupdates">
                             <h1>GoodBytes.be</h1>
-                            <input type="text" value="What's on your mind?" id="commentmessage" name="commentmessage" />
+                            <input type="text" placeholder="What's on your mind?" id="commentmessage" name="commentmessage" />
                             <input id="btnSubmit" type="submit" value="Share" />
 
                             <ul id="listupdates">
