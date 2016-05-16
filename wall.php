@@ -2,12 +2,12 @@
 
 session_start();
 include_once("classes/Comment.class.php");
+include_once ("classes/User.class.php");
 include_once ("classes/Photo.class.php");
 if( !isset( $_SESSION['userID'] ) ){
     header('location: login.php');
 
 }
-
 $p = new Photo();
 $p->UserID = $_SESSION["userID"];
 $profilePhotos = $p->ShowProfilePhotos();
@@ -85,7 +85,7 @@ $profilePhotos = $p->ShowProfilePhotos();
         <a href="wall.php"><img id="logoinsta" src="images/Instragram%20logo%202013.png"></a>
         <a class="fotoknop" href="description.php">Plaats Foto!</a>
         <div class="uppericons">
-           <a href="profilepage.php"><img class="profileicon" src="images/profileicon.png"></a>
+           <a href="profilepage.php?userID=<?php $profilePhotos['userID'] ?>"><img class="profileicon" src="images/profileicon.png"></a>
            <a href="settings.php"><img class="settingsicon" src="images/settings-icon.png"></a>
            </div>
            
@@ -104,18 +104,16 @@ $profilePhotos = $p->ShowProfilePhotos();
                     <?php  //echo "<img src=" . $newfilename . " />";?>
                 </div>
 
-                <div id="comment-section">
-                    <p>This is a comment!! #YOLO</p>
 
-                    <article class="userPhotos">
-                        <?php foreach($profilePhotos as $profilePhoto): ?>
-                            <div>
-                                <a href="photo.php?postID=<?php echo $profilePhoto['postID']?>"><img src="files/<?php echo $profilePhoto['photo']; ?>" alt=""></a>
-                            </div>
-                        <?php endforeach; ?>
-                    </article>
+                <article class="userPhotos">
+                    <?php foreach($profilePhotos as $profilePhoto): ?>
+                        <div>
+                            <a href="photo.php?postID=<?php echo $profilePhoto['postID']?>"><img src="files/<?php echo $profilePhoto['photo']; ?>" alt=""></a>
+                        </div>
+                    <?php endforeach; ?>
+                </article>
 
-                </div>
+
             </li>
 
 
